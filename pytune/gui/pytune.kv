@@ -1,0 +1,44 @@
+#:import AnalogDisplay pytune.gui.analog_display.AnalogDisplay
+#:import Spectrum pytune.gui.spectrum.Spectrum
+#:import DecibelMeter pytune.gui.dbmeter.DecibelMeter
+
+Widget:
+    Spectrum:
+        id: spectrum
+        pos: analog.pos
+        size: analog.width,analog.padding * 2.0
+        color: .2,.2,.3,.5
+    BoxLayout:
+        size: root.size
+        orientation: 'vertical'
+        AnalogDisplay:
+            id: analog
+            size_hint: 1, .45
+            value: 90
+        BoxLayout:
+            size_hint: 1, .05
+            Label:
+                text: analog.notes[1].fullname if analog.notes else '?'            
+        BoxLayout:
+            size_hint: 1, .5
+            orientation: 'vertical'
+            BoxLayout:
+                id: labox
+                size_hint: 1,.5
+                Button:
+                    text: '-'
+                    font_size: self.width/2.0
+                    size_hint: .4,1
+                    on_press: analog.la -=1
+			    Label:
+			        text: 'A=%s' % analog.la
+			        size_hint: .2,1
+			        pos: labox.center_x - self.width/2.0, labox.center_y - self.height/2.0
+                Button:
+                    text: '+'
+                    font_size: self.width/2.0
+                    size_hint: .4,1
+                    on_press: analog.la +=1
+            Label:
+                size_hint: 1,.5
+                text: 'Frequency=%.2F' % analog.notes[1].frequency if analog.notes else 'Frequency=?'

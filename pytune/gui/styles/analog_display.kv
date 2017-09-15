@@ -1,0 +1,132 @@
+#:import AnalogDisplay pytune.gui.analog_display.AnalogDisplay
+
+[ML@Line]:
+    points: ctx.points if hasattr(ctx, 'points') else []
+    width: ctx.width if hasattr(ctx,'width') else 2
+    cap: 'none'
+
+[MSL@Line]:
+    points: ctx.points if hasattr(ctx, 'points') else []
+    width: ctx.width if hasattr(ctx,'width') else 1
+    cap: 'none'
+
+
+<AnalogDisplay>:
+    padding: min((self.width/2.0,self.height)) / 9.1
+    needle_length: min((self.height,self.width/2.0)) - self.padding * 2
+    guide_length: min((self.height,self.width/2.0)) / 19.0
+    subguide_length: self.guide_length * 3 / 4
+    guide_width: self.guide_length / 10.0 
+    subguide_width: self.guide_length / 16.0
+    canvas.before:
+        Color:
+            rgb: .2, .2, .5
+        # Line:
+            # rectangle: self.x,self.y, self.width,self.height
+            # width: 1
+        Line:
+            points: self.calc_needle_points(self.pos,self.size,self.padding,self.needle_length,self.value)
+            width: min((self.height,self.width/2.0)) / 200.033333333
+        Line:
+            width: min((self.height,self.width/2.0)) / 80.0
+            circle: self.center_x, self.y + self.padding, min((self.height,self.width/2.0)) / 70.0, .1,360 
+    canvas.after:
+        Color:
+            rgb: .2, .2, .5
+        ML:
+            points: self.calc_guidelines(30,self.guide_length,self.value,self.pos,self.size)
+            width: self.guide_width
+        MSL:
+            points: self.calc_guidelines(35,self.subguide_length,self.value,self.pos,self.size)
+            width: self.subguide_width
+        MSL:
+            points: self.calc_guidelines(40,self.subguide_length,self.value,self.pos,self.size)
+            width: self.subguide_width
+        MSL:
+            points: self.calc_guidelines(45,self.subguide_length,self.value,self.pos,self.size)
+            width: self.subguide_width
+
+        ML:
+            points: self.calc_guidelines(50,self.guide_length,self.value,self.pos,self.size)
+            width: self.guide_width
+        MSL:
+            points: self.calc_guidelines(55,self.subguide_length,self.value,self.pos,self.size)
+            width: self.subguide_width
+        MSL:
+            points: self.calc_guidelines(60,self.subguide_length,self.value,self.pos,self.size)
+            width: self.subguide_width
+        MSL:
+            points: self.calc_guidelines(65,self.subguide_length,self.value,self.pos,self.size)
+            width: self.subguide_width
+
+        ML:
+            points: self.calc_guidelines(70,self.guide_length,self.value,self.pos,self.size)
+            width: self.guide_width
+        MSL:
+            points: self.calc_guidelines(75,self.subguide_length,self.value,self.pos,self.size)
+            width: self.subguide_width
+        MSL:
+            points: self.calc_guidelines(80,self.subguide_length,self.value,self.pos,self.size)
+            width: self.subguide_width
+        MSL:
+            points: self.calc_guidelines(85,self.subguide_length,self.value,self.pos,self.size)
+            width: self.subguide_width
+            
+        ML:
+            points: self.calc_guidelines(90,self.guide_length,self.value,self.pos,self.size)
+            width: self.guide_width
+        MSL:
+            points: self.calc_guidelines(95,self.subguide_length,self.value,self.pos,self.size)
+            width: self.subguide_width
+        MSL:
+            points: self.calc_guidelines(100,self.subguide_length,self.value,self.pos,self.size)
+            width: self.subguide_width
+        MSL:
+            points: self.calc_guidelines(105,self.subguide_length,self.value,self.pos,self.size)
+            width: self.subguide_width
+            
+            
+        ML:
+            points: self.calc_guidelines(110,self.guide_length,self.value,self.pos,self.size)
+            width: self.guide_width
+        MSL:
+            points: self.calc_guidelines(115,self.subguide_length,self.value,self.pos,self.size)
+            width: self.subguide_width
+        MSL:
+            points: self.calc_guidelines(120,self.subguide_length,self.value,self.pos,self.size)
+            width: self.subguide_width
+        MSL:
+            points: self.calc_guidelines(125,self.subguide_length,self.value,self.pos,self.size)
+            width: self.subguide_width
+            
+        ML:
+            points: self.calc_guidelines(130,self.guide_length,self.value,self.pos,self.size)
+            width: self.guide_width
+        MSL:
+            points: self.calc_guidelines(135,self.subguide_length,self.value,self.pos,self.size)
+            width: self.subguide_width
+        MSL:
+            points: self.calc_guidelines(140,self.subguide_length,self.value,self.pos,self.size)
+            width: self.subguide_width
+        MSL:
+            points: self.calc_guidelines(145,self.subguide_length,self.value,self.pos,self.size)
+            width: self.subguide_width
+            
+        ML:
+            points: self.calc_guidelines(150,self.guide_length,self.value,self.pos,self.size)
+            width: self.guide_width
+    # Label:
+        # id: prev_note
+        # pos: root.calc_label_positions((root.maxvalue - root.minvalue ) / 2 + root.minvalue,root.needle_length* 1.1,root.pos,root.size)
+        # size: 1,root.padding
+        # text: root.notes[1].fullname if root.notes else '?'
+    # Label:
+        # id: current_note
+        # pos: root.calc_label_positions(root.minvalue,root.needle_length* 1.1,root.pos,root.size)
+        # size: 1,root.padding
+        # text: str(root.notes[0]) if root.notes else '?'
+    # Label:
+        # id: next_note
+        # pos: root.calc_label_positions(root.maxvalue,root.needle_length * 1.1,root.pos,root.size)
+        # text: str(root.notes[2]) if root.notes else '?'
+        # size: 1,root.padding
