@@ -4,7 +4,7 @@ from kivy.uix.widget import Widget
 from kivy.properties import NumericProperty, ListProperty
 from kivy.app import App
 
-from pytune.configuration import settings
+from tuner.configuration import settings
 
 
 class Spectrum(Widget):

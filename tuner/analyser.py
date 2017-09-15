@@ -4,9 +4,9 @@ import abc
 from kivy.logger import Logger
 import numpy as np
 
-from pytune.inputs import MicrophoneReader
-from pytune.configuration import settings, init as init_config
-import pytune.algorithms as alg
+from tuner.inputs import MicrophoneReader
+from tuner.configuration import settings, init as init_config
+import tuner.algorithms as alg
 
 
 class Analyser:

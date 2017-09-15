@@ -3,7 +3,7 @@ import abc
 import numpy as np
 import pyaudio
 
-from pytune.configuration import settings
+from tuner.configuration import settings
 
 
 class AudioReader(object, metaclass=abc.ABCMeta):

@@ -14,7 +14,7 @@ pip install cython
 ### pytune
 
 ```bash
-pip install pytune
+pip install tuner
 ```
 
 Or from source

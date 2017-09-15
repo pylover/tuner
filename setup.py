@@ -17,15 +17,16 @@ dependencies = [
 ]
 
 setup(
-    name="pytune",
+    name="tuner",
     version=package_version,
     author="Vahid Mardani",
+    url="http://github.com/pylover/tuner",
     author_email="vahid.mardani@gmail.com",
     long_description=open('README.md').read(),
     install_requires=dependencies,
     packages=find_packages(),
     package_data={
-        'pytune': [
+        'tuner': [
             'data/*.yaml',
             'gui/*.kv',
             'gui/styles/*.kv'

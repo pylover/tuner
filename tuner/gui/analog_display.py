@@ -4,7 +4,7 @@ from kivy.uix.widget import Widget
 from kivy.properties import NumericProperty, ListProperty
 from kivy.animation import Animation
 from kivy.app import App
-from pytune.notation import Note
+from tuner.notation import Note
 
 
 class AnalogDisplay(Widget):

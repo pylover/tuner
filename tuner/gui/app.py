@@ -1,8 +1,8 @@
 from kivy.app import App
-from pytune.analyser import Analyser
+from tuner.analyser import Analyser
 
 
-class PyTuneApp(App):
+class TunerApp(App):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.analyser = Analyser()
