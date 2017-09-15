@@ -1,64 +1,63 @@
-'''
-Created on Feb 13, 2013
-
-@author: vahid
-'''
-
 import abc
-from pytune import config
-import pyaudio
+
 import numpy as np
+import pyaudio
 
-class AudioReader(object):
-    __metaclass__ = abc.ABCMeta
-    def __init__(self):
-        pass
-    
-    def start(self,callback):
-        assert callable(callback), "Invalid Callback"
+from pytune.configuration import settings
+
+
+class AudioReader(object, metaclass=abc.ABCMeta):
+    def __init__(self, callback):
         self.callback = callback
-        self._start()
-    
-    def close(self):
-        self._close()
-        self.callback = None
 
-    def _callback(self,*args,**kwargs):
+    def _callback(self, *args, **kwargs):
         if self.callback:
-            self.callback(*args,**kwargs)
+            self.callback(*args, **kwargs)
 
     @abc.abstractmethod
-    def _start(self):
+    def open(self):
         pass
 
     @abc.abstractmethod
-    def _close(self):
+    def start(self):
         pass
-    
+
+    @abc.abstractmethod
+    def stop(self):
+        pass
+
+    @abc.abstractmethod
+    def close(self):
+        pass
+
 
 class MicrophoneReader(AudioReader):
-    
-    def __init__(self):
-        self.__stop_flag = False # there are just a boolean for flag, Bingo! atomic operations does not requires high-level lock objects.
-        
-    def _start(self):
-        p = pyaudio.PyAudio()
-    
-        
-        try:
-            stream = p.open(format=config.listen.format,
-                        channels=config.listen.channels,
-                        rate=config.listen.samplerate,
-                        input=True,
-                        frames_per_buffer=config.listen.chunk)
-            
-            while not self.__stop_flag:
-                data = stream.read(config.listen.chunk)
-                self._callback(np.fromstring(data,dtype=np.int16))
-        except:
-            stream.close()
-            raise
-            
-    
-    def _close(self):
-        self.__stop_flag = True
+    stream = None
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.audio = pyaudio.PyAudio()
+        # there are just a boolean for flag, Bingo! atomic operations does not requires high-level lock objects.
+        self._stop_flag = False
+
+    def open(self):
+        self.stream = self.audio.open(
+            format=pyaudio.paInt16,
+            channels=settings.listen.channels,
+            rate=settings.listen.samplerate,
+            input=True,
+            frames_per_buffer=settings.listen.chunk
+        )
+
+    def start(self):
+        while not self._stop_flag:
+            data = self.stream.read(settings.listen.chunk)
+            self._callback(np.fromstring(data, dtype=np.int16))
+
+    def stop(self):
+        # This method will be called within another thread.
+        self._stop_flag = True
+
+    def close(self):
+        self.stream.close()
+
