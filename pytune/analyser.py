@@ -50,7 +50,7 @@ class Analyser:
             for c in self.pitch_callbacks:
                 c(freq)
         except IndexError as ex:
-            Logger.exception(ex.message)
+            Logger.exception(ex)
 
     def _onread(self, data):
         self.counter += 1

@@ -8,7 +8,7 @@ from kivy.lang import Builder
 from kivy.logger import Logger
 
 from .gui.app import PyTuneApp
-from .configuration import settings
+from .configuration import settings, init as init_config
 
 __version__ = '1.0.0a'
 
@@ -19,7 +19,7 @@ configfile = os.path.join(rootdir,'config.ini')
 
 
 def main():
-
+    init_config()
     KivyConfig.set('graphics', 'width', settings.width)
     KivyConfig.set('graphics', 'height', settings.height)
 

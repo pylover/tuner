@@ -2,8 +2,8 @@ import math
 
 from kivy.uix.widget import Widget
 from kivy.properties import NumericProperty, ListProperty
+from kivy.app import App
 
-from pytune.analyser import Analyser
 from pytune.configuration import settings
 
 
@@ -15,11 +15,11 @@ class Spectrum(Widget):
 
     def __init__(self, *args, **kwargs):
         Widget.__init__(self, *args, **kwargs)
-        Analyser().data_callbacks += self.on_data_received
+        App.get_running_app().analyser.add_data_callback(self.on_data_received)
         self.buffer = [0] * self.lines
         self._max = 0
 
-    def on_data_received(self, sender, data, frameno):
+    def on_data_received(self, data, frameno):
         counter = 0
         downsampling_rate = settings.listen.chunk / 4
         result = []

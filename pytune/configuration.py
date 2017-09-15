@@ -6,8 +6,8 @@ data_path = path.abspath(path.join(path.dirname(__file__),'..'))
 
 builtin_configuration = f'''
 
-width: 480
-height: 640
+width: 1024
+height: 1200
 samples_dir: data_path/samples
 #chunk_size: 44032 / 8
 listen:

@@ -49,7 +49,7 @@ class Note:
 
     @property
     def fullname(self):
-        return '%s%s' % (self.name, self.octave)
+        return '%s%.2F' % (self.name, self.octave)
 
     def walk(self, step=1, unit=units.midi):
         return Note(midi_number=self.midinumber + step, lafreq=self.la)
