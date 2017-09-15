@@ -14,6 +14,9 @@ dependencies = [
     'pymlconf',
     'kivy',
     'pyaudio',
+    'numpy',
+    'scipy',
+    'pygame'
 ]
 
 

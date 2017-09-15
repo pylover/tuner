@@ -32,10 +32,12 @@ def parabolic(f, x):
     try:
         xv = 1/2. * (f[x-1] - f[x+1]) / (f[x-1] - 2 * f[x] + f[x+1]) + x
         yv = f[x] - 1/4. * (f[x-1] - f[x+1]) * (xv - x)
-    except IndexError: 
+    except IndexError as ex:
         # TODO: handle or remove try/catch
-        print 40 * '#'
-    return (xv, yv)
+        print(40 * '#', ex)
+
+    return xv, yv
+
 
 def freq_from_autocorr(signal, fs):
     """Estimate frequency using autocorrelation
@@ -49,7 +51,7 @@ def freq_from_autocorr(signal, fs):
     """
     # Calculate autocorrelation (same thing as convolution, but with one input
     # reversed in time), and throw away the negative lags
-    signal -= mean(signal) # Remove DC offset
+    signal -= mean(signal)  # Remove DC offset
     corr = fftconvolve(signal, signal[::-1], mode='full')
     corr = corr[len(corr)/2:]
     
@@ -91,6 +93,7 @@ def freq_from_fft(signal, fs):
     # Convert to equivalent frequency
     return fs * i_interp / N # Hz
 
+
 def freq_from_crossings(signal, fs):
     """Estimate frequency by counting zero crossings
     
@@ -114,6 +117,7 @@ def freq_from_crossings(signal, fs):
     # Some other interpolation based on neighboring points might be better. Spline, cubic, whatever
     
     return fs / mean(diff(crossings))
+
 
 def freq_from_hps(signal, fs):
     """Estimate frequency using harmonic product spectrum

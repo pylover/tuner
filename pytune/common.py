@@ -1,14 +1,11 @@
-'''
-Created on Feb 13, 2013
-
-@author: vahid
-'''
 def singleton(cls):
     instances = {}
+
     def getinstance():
         if cls not in instances:
             instances[cls] = cls()
         return instances[cls]
+
     return getinstance
 
 

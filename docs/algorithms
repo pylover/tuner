@@ -1,0 +1,12 @@
+
+url: http://access.feld.cvut.cz/view.php?cisloclanku=2009060001
+	Modified Autocorrelation Function (MACF) Method
+	Normalized Cross Correlation Function (NCCF) Method
+	Average Magnitude Difference Function (AMDF) Method
+	Cepstrum Pitch Determination (CPD)
+	
+parabolic : https://ccrma.stanford.edu/~jos/sasp/Quadratic_Interpolation_Spectral_Peaks.html
+autocorr
+fft
+crossings
+hps
