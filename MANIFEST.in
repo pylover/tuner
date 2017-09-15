@@ -1,1 +1,3 @@
 include pytune/data/*.yaml
+include pytune/gui/*.kv
+include pytune/gui/styles/*.kv

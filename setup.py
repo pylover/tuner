@@ -24,7 +24,13 @@ setup(
     long_description=open('README.md').read(),
     install_requires=dependencies,
     packages=find_packages(),
-    package_data={'pytune': ['data/*.yaml']},
+    package_data={
+        'pytune': [
+            'data/*.yaml',
+            'gui/*.kv',
+            'gui/styles/*.kv'
+        ]
+    },
     # data_files=[('', ['pytune/data/*.yaml'])],
     entry_points={
         'console_scripts': [
