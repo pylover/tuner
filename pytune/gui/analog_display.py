@@ -25,7 +25,7 @@ class AnalogDisplay(Widget):
     
     def __init__(self,*args,**kwargs):
         Widget.__init__(self,*args,**kwargs)
-        Analyser().pitch_detected += self.on_pitch_detected
+        Analyser().pitch_callbacks += self.on_pitch_detected
         self.bind(la=self.on_la_changed)
 
     def on_la_changed(self,*args,**kwargs):

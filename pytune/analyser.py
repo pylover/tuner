@@ -17,10 +17,10 @@ class Analyser:
     __metaclass__ = abc.ABCMeta
     __reader_factory__ = MicrophoneReader
 
-    def __init__(self, data_callback=None, pitch_callback=None):
+    def __init__(self):
         self.counter = 0
-        self.data_received = data_callback
-        self.pitch_detected = pitch_callback
+        self.data_callbacks = []
+        self.pitch_callbacks = []
         self.pitch_buffer = None
         self.reader = self.__reader_factory__(self._onread)
         self._thread = Thread(target=self.listen)
@@ -40,23 +40,25 @@ class Analyser:
 
     def detect_pitch(self, data):
         try:
-            # freq=  alg.freq_from_fft(data,settings.listen.samplerate)
-            # freq=  alg.freq_from_crossings(data,settings.listen.samplerate)
+            # freq = alg.freq_from_fft(data,settings.listen.samplerate)
+            # freq = alg.freq_from_crossings(data,settings.listen.samplerate)
             freq = alg.freq_from_autocorr(data, settings.listen.samplerate)
-            # freq=  alg.freq_from_hps(data,settings.listen.samplerate)
+            # freq = alg.freq_from_hps(data,settings.listen.samplerate)
             if freq is None or np.isnan(freq):
                 return
 
-            self.pitch_detected(freq)
+            for c in self.pitch_callbacks:
+                c(freq)
         except IndexError as ex:
             Logger.exception(ex.message)
 
     def _onread(self, data):
         self.counter += 1
-        if self.data_received:
-            self.data_received(data, self.counter)
+        if self.data_callbacks:
+            for c in self.data_callbacks:
+                c(data, self.counter)
 
-        if self.pitch_detected is not None and self.pitch_buffer is not None:
+        if self.pitch_callbacks and self.pitch_buffer is not None:
             if len(self.pitch_buffer) >= settings.pitch_detection.chunk:
                 self.detect_pitch(self.pitch_buffer)
                 self.pitch_buffer = None
@@ -66,6 +68,12 @@ class Analyser:
         elif np.max(data) >= settings.pitch_detection.threshold:
             self.pitch_buffer = data
 
+    def add_data_callback(self, callback):
+        self.data_callbacks.append(callback)
+
+    def add_pitch_detect_callback(self, callback):
+        self.pitch_callbacks.append(callback)
+
 
 if __name__ == '__main__':
     init_config()
@@ -73,7 +81,12 @@ if __name__ == '__main__':
     def ondata(data, index):
         print(index, data)
 
-    detector = Analyser(data_callback=ondata)
+    def onpitch(freq):
+        print('PITCH: ', freq)
+
+    detector = Analyser()
+    # detector.add_data_callback(ondata)
+    detector.add_pitch_detect_callback(onpitch)
     try:
         detector.start()
     except KeyboardInterrupt:

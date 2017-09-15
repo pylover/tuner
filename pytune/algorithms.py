@@ -1,13 +1,8 @@
-'''
-Created on Jan 26, 2013
 
-@author: vahid
-'''
-#from matplotlib.mlab import find
-
-from numpy import argmax, log, mean, diff, copy, arange , nonzero
-from scipy.signal import fftconvolve, kaiser, decimate
+import pyaudio
+from numpy import argmax, log, mean, diff, copy, arange , nonzero, int16
 from numpy.fft import rfft
+from scipy.signal import fftconvolve, kaiser, decimate
 
 
 def parabolic(f, x):
@@ -49,11 +44,13 @@ def freq_from_autocorr(signal, fs):
     instruments, this implementation has trouble with finding the true peak
     
     """
+    # Remove DC offset
+    signal -= mean(signal, dtype=int16)
+
     # Calculate autocorrelation (same thing as convolution, but with one input
     # reversed in time), and throw away the negative lags
-    signal -= mean(signal)  # Remove DC offset
     corr = fftconvolve(signal, signal[::-1], mode='full')
-    corr = corr[len(corr)/2:]
+    corr = corr[len(corr)//2:]
     
     # Find the first low point
     d = diff(corr)

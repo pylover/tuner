@@ -1,13 +1,10 @@
-'''
-Created on Feb 4, 2013
+import math
 
-@author: vahid
-'''
 from kivy.uix.widget import Widget
 from kivy.properties import NumericProperty, ListProperty
+
 from pytune.analyser import Analyser
-from pytune import config
-import math
+from pytune.configuration import settings
 
 
 class Spectrum(Widget):
@@ -18,13 +15,13 @@ class Spectrum(Widget):
 
     def __init__(self, *args, **kwargs):
         Widget.__init__(self, *args, **kwargs)
-        Analyser().data_received += self.on_data_received
+        Analyser().data_callbacks += self.on_data_received
         self.buffer = [0] * self.lines
         self._max = 0
 
     def on_data_received(self, sender, data, frameno):
         counter = 0
-        downsampling_rate = config.listen.chunk / 4
+        downsampling_rate = settings.listen.chunk / 4
         result = []
         thrshld = .01
         bag = 0.0

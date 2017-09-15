@@ -17,7 +17,7 @@ class DecibelMeter(Widget):
     
     def __init__(self,*args,**kw):
         Widget.__init__(self,*args,**kw)
-        Analyser().data_received += self.on_data_received
+        Analyser().data_callbacks += self.on_data_received
         
     def on_data_received(self,sender,data,frameno):
         peak = np.max(np.abs(data))
