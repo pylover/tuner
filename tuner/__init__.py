@@ -6,10 +6,10 @@ from kivy.config import Config as KivyConfig
 from kivy.lang import Builder
 from kivy.logger import Logger
 
-from .gui.app import PyTuneApp
+from .gui.app import TunerApp
 from .configuration import settings, init as init_config
 
-__version__ = '1.0.0a4'
+__version__ = '1.0.0b1'
 
 rootdir = os.path.abspath(os.path.dirname(__file__))
 stylesdir = os.path.join(rootdir, 'gui', 'styles')
@@ -26,4 +26,4 @@ def main():
         for f in files:
             Logger.debug('loading style file: %s' % f)
             Builder.load_file(f)
-    PyTuneApp().run()
+    TunerApp().run()

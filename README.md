@@ -1,4 +1,4 @@
-# pytune
+# tuner
 Simple music instrument tuner.
 
 
@@ -11,7 +11,7 @@ sudo apt install libgl1-mesa-dev portaudio19-dev
 pip install cython
 ```
 
-### pytune
+### tuner
 
 ```bash
 pip install tuner
@@ -20,6 +20,6 @@ pip install tuner
 Or from source
 
 ```bash
-cd path/to/pytune
+cd path/to/tuner
 pip install -e .
 ```

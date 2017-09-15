@@ -1,3 +1,3 @@
-include pytune/data/*.yaml
-include pytune/gui/*.kv
-include pytune/gui/styles/*.kv
+include tuner/data/*.yaml
+include tuner/gui/*.kv
+include tuner/gui/styles/*.kv

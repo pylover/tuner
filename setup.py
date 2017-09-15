@@ -3,7 +3,7 @@ from os.path import join, dirname
 from setuptools import setup, find_packages
 
 # reading package version (same way the sqlalchemy does)
-with open(join(dirname(__file__), 'pytune', '__init__.py')) as v_file:
+with open(join(dirname(__file__), 'tuner', '__init__.py')) as v_file:
     package_version = re.compile(r".*__version__ = '(.*?)'", re.S).match(v_file.read()).group(1)
 
 dependencies = [
@@ -32,10 +32,10 @@ setup(
             'gui/styles/*.kv'
         ]
     },
-    # data_files=[('', ['pytune/data/*.yaml'])],
+    # data_files=[('', ['tuner/data/*.yaml'])],
     entry_points={
         'console_scripts': [
-            'pytune = pytune:main'
+            'tuner = tuner:main'
         ]
     }
 )
