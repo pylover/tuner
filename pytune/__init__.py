@@ -10,7 +10,7 @@ from kivy.logger import Logger
 from .gui.app import PyTuneApp
 from .configuration import settings, init as init_config
 
-__version__ = '1.0.0a'
+__version__ = '1.0.0a1'
 
 
 rootdir = os.path.abspath(os.path.dirname(__file__))

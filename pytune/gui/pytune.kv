@@ -15,6 +15,9 @@ Widget:
             id: analog
             size_hint: 1, .45
             value: 90
+#        DecibelMeter:
+#            id: dbmeter
+#            size_hint: 1, .45
         BoxLayout:
             size_hint: 1, .05
             Label:
@@ -44,4 +47,4 @@ Widget:
             Label:
                 size_hint: 1,.5
                 font_size: self.width/15.0
-                text: '%.2FHZ' % analog.notes[1].frequency if analog.notes else '?'
+                text: '%.2F Hz' % analog.notes[1].frequency if analog.notes else '?'

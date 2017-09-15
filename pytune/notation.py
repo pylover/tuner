@@ -23,7 +23,7 @@ class units:
 
 class Note:
     def __init__(self, frequency=None, midi_number=None, lafreq=440.0):
-        assert ((frequency != None) ^ (midi_number != None)), 'one of frequency or midi_number must be passed'
+        assert (frequency is not None) ^ (midi_number is not None), 'one of frequency or midi_number must be passed'
         self.la = lafreq
         self.frequency = frequency if frequency else (2.0 ** ((midi_number - 69.0) / 12.0)) * self.la
 

@@ -1,15 +1,12 @@
 from pymlconf import DeferredConfigManager
 from os import path
 
-data_path = path.abspath(path.join(path.dirname(__file__),'..'))
-
+data_path = path.abspath(path.join(path.dirname(__file__), '..'))
 
 builtin_configuration = f'''
-
 width: 1024
 height: 1200
 samples_dir: data_path/samples
-#chunk_size: 44032 / 8
 listen:
     chunk: 1024
     channels: 1
@@ -20,7 +17,6 @@ pitch_detection:
     chunk: 5120
     
 '''
-
 
 settings = DeferredConfigManager()
 
