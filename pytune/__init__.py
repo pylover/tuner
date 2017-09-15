@@ -8,8 +8,7 @@ import kivy
 from .gui.app import PyTuneApp
 from ._config import config
 
-__version__ = '1.0.0'
-kivy.require('1.5.1') 
+__version__ = '1.0.0a'
 
 rootdir = os.path.abspath(os.path.dirname(__file__))
 stylesdir = os.path.join(rootdir,'gui','styles')
@@ -17,7 +16,7 @@ configfile = os.path.join(rootdir,'config.ini')
 
 
 
-def start():
+def main():
     from kivy.config import Config as KivyConfig
     from kivy.lang import Builder
     from kivy.logger import Logger
