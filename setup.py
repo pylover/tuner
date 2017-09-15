@@ -1,13 +1,10 @@
-
 import re
 from os.path import join, dirname
 from setuptools import setup, find_packages
 
-
 # reading package version (same way the sqlalchemy does)
 with open(join(dirname(__file__), 'pytune', '__init__.py')) as v_file:
     package_version = re.compile(r".*__version__ = '(.*?)'", re.S).match(v_file.read()).group(1)
-
 
 dependencies = [
     'kivy',
@@ -19,7 +16,6 @@ dependencies = [
     'pygame'
 ]
 
-
 setup(
     name="pytune",
     version=package_version,
@@ -28,6 +24,8 @@ setup(
     long_description=open('README.md').read(),
     install_requires=dependencies,
     packages=find_packages(),
+    package_data={'pytune': ['data/*.yaml']},
+    # data_files=[('', ['pytune/data/*.yaml'])],
     entry_points={
         'console_scripts': [
             'pytune = pytune:main'
