@@ -26,3 +26,11 @@ Or from source
 cd path/to/tuner
 pip install -e .
 ```
+
+Then run:
+
+```bash
+tuner
+```
+
+to start the application.
