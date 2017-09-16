@@ -18,6 +18,7 @@ dependencies = [
 
 setup(
     name="tuner",
+    description="Musical instrument tuner using Kivy.",
     version=package_version,
     author="Vahid Mardani",
     url="http://github.com/pylover/tuner",

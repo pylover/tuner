@@ -9,7 +9,7 @@ from kivy.logger import Logger
 from .gui.app import TunerApp
 from .configuration import settings, init as init_config
 
-__version__ = '1.0.0b1'
+__version__ = '1.0.0b2'
 
 rootdir = os.path.abspath(os.path.dirname(__file__))
 stylesdir = os.path.join(rootdir, 'gui', 'styles')
