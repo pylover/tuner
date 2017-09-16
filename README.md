@@ -1,5 +1,5 @@
 # tuner
-Simple music instrument tuner.
+Simple musical instrument tuner.
 
 
 ## Install
@@ -8,6 +8,9 @@ Simple music instrument tuner.
 
 ```bash
 sudo apt install libgl1-mesa-dev portaudio19-dev
+```
+
+```bash
 pip install cython
 ```
 
