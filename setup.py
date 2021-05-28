@@ -7,12 +7,12 @@ with open(join(dirname(__file__), 'tuner', '__init__.py')) as v_file:
     package_version = re.compile(r".*__version__ = '(.*?)'", re.S).match(v_file.read()).group(1)
 
 dependencies = [
-    'kivy==1.11.1',
-    'pymlconf==0.8.9',
-    'pyaudio==0.2.11',
-    'numpy==1.17.2',
-    'scipy==1.3.1',
-    'pygame==1.9.6'
+    'kivy == 1.11.1',
+    'pymlconf == 0.8.9',
+    'pyaudio == 0.2.11',
+    'numpy == 1.17.2',
+    'scipy >= 1.6',
+    'pygame > 2'
 ]
 
 setup(

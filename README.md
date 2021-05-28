@@ -7,11 +7,11 @@ Simple musical instrument tuner.
 ### Dependencies
 
 ```bash
-sudo apt install libgl1-mesa-dev portaudio19-dev
+sudo apt install libgl1-mesa-dev portaudio19-dev libsdl1.2-dev
 ```
 
 ```bash
-pip install cython
+pip install 'cython <= 0.28.2'
 ```
 
 ### tuner

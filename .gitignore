@@ -62,3 +62,7 @@ target/
 .ipynb_checkpoints
 .idea
 practice/file.wav
+
+# Vim
+.*.sw[op]
+.ropeproject
