@@ -10,7 +10,7 @@ dependencies = [
     'kivy == 1.11.1',
     'pymlconf == 0.8.9',
     'pyaudio == 0.2.11',
-    'numpy == 1.17.2',
+    'numpy == 1.22.0',
     'scipy >= 1.6',
     'pygame > 2'
 ]
